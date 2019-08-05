@@ -1,6 +1,11 @@
 # DeepAR: Probabilistic Forecasting with Autoregressive Recurrent Networks
 Reimplementation of the DeepAR paper(https://arxiv.org/abs/1704.04110) in PyTorch.
 
+## Authors:
+Yunkai Zhang, University of California, Santa Barbara
+Qiao Jiang, Brown University
+
+
 ## To run:
 
 0. Install all dependencies listed in requirements.txt. Note that the model has only been tested in the versions shown in the text file.
