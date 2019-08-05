@@ -2,24 +2,36 @@
 Reimplementation of the DeepAR paper(https://arxiv.org/abs/1704.04110) in PyTorch.
 
 ## Authors:
-Yunkai Zhang - University of California, Santa Barbara<br/>
-Qiao Jiang - Brown University
+* **Yunkai Zhang** - *University of California, Santa Barbara* <yunkai_zhang@ucsb.edu>
 
+* **Qiao Jiang** - *Brown University*
 
 ## To run:
 
 0. Install all dependencies listed in requirements.txt. Note that the model has only been tested in the versions shown in the text file.
-Download the dataset and preprocess the data:
-1. python preprocess_elect.py
-Start training:
-2. python train.py
+1. Download the dataset and preprocess the data:
+```bash
+python preprocess_elect.py
+```
+2. Start training:
+```bash
+python train.py
+```
 If you want to perform ancestral sampling,
-2. python train.py --sampling
+```bash
+python train.py --sampling
+```
 If you do not want to do normalization during evaluation,
-2. python train.py --relative-metrics
-Evaluate a set of saved model weights:
-3. python evaluate.py
-Perform hyperparameter search:
-4. python search_params.py
+```bash
+python train.py --relative-metrics
+```
+3. Evaluate a set of saved model weights:
+```bash
+python evaluate.py
+```
+4. Perform hyperparameter search:
+```bash
+python search_params.py
+```
 
 ## Results
