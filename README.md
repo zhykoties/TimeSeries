@@ -2,8 +2,8 @@
 Reimplementation of the DeepAR paper(https://arxiv.org/abs/1704.04110) in PyTorch.
 
 ## Authors:
-Yunkai Zhang, University of California, Santa Barbara . 
-Qiao Jiang, Brown University . 
+Yunkai Zhang, University of California, Santa Barbara<br/>
+Qiao Jiang, Brown University
 
 
 ## To run:
