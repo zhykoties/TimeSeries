@@ -138,7 +138,7 @@ def train_and_evaluate(model: nn.Module,
 
         logger.info('Current Best ND is: %.5f' % best_test_ND)
 
-        utils.plot_all_epoch(ND_summary[:epoch], args.dataset + '_ND', params.plot_dir)
+        utils.plot_all_epoch(ND_summary[:epoch + 1], args.dataset + '_ND', params.plot_dir)
         utils.plot_all_epoch(loss_summary[:(epoch + 1) * train_len], args.dataset + '_loss', params.plot_dir)
 
         last_json_path = os.path.join(params.model_dir, 'metrics_test_last_weights.json')
