@@ -35,3 +35,8 @@ python search_params.py
 ```
 
 ## Results
+The model is evaluated on the electricity dataset, which contains the electricity consumption of 370 households from 2011 to 2014. Under hourly frequency, we use the first week of September, 2014 as the test set and all time steps prior to that as the train set. Following the experiment design in DeepAR, the window size is chosen to be 192, where the last 24 is the forecasting horizon. History (number of time steps since the beginning of each household), month of the year, day of the week, and hour of the day are used as time covariates. Notice that some households started at different times, so we only use windows that contain non-missing values.
+
+Under Gaussian likelihood, we use the Adam optimizer with early stopping to train the model for 20 epoches. The same set of hyperparameters is used as outlined in the paper. Weights with the best ND value is selected, where __ND = 0.06349__, RMSE = 0.452, rou90 = 0.034 and rou50 = 0.063.
+
+![Sample results on electricity. The top 10 plots are sampled from the test set with the highest 10% ND values, whereas the bottom 10 plots are sampled from the rest of the test set.](./experiments/electricity/figures/best_ND.png)
