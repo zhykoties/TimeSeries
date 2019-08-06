@@ -224,18 +224,18 @@ def accuracy_ROU_(rou: float, samples: torch.Tensor, labels: torch.Tensor, relat
     samples[:, mask] = 0.
 
     pred_samples = samples.shape[0]
-    rou_th = math.ceil(pred_samples * (1 - rou))
+    rou_th = math.floor(pred_samples * rou)
 
     samples = np.sort(samples, axis=0)
-    rou_pred = samples[-rou_th]
+    rou_pred = samples[rou_th]
 
-    abs_diff = labels - rou_pred
+    abs_diff = np.abs(labels - rou_pred)
     abs_diff_1 = abs_diff.copy()
-    abs_diff_1[labels > rou_pred] = 0.
+    abs_diff_1[labels < rou_pred] = 0.
     abs_diff_2 = abs_diff.copy()
-    abs_diff_2[labels <= rou_pred] = 0.
+    abs_diff_2[labels >= rou_pred] = 0.
 
-    numerator = 2 * (rou * np.sum(abs_diff_1, axis=1) - (1 - rou) * np.sum(abs_diff_2, axis=1))
+    numerator = 2 * (rou * np.sum(abs_diff_1, axis=1) + (1 - rou) * np.sum(abs_diff_2, axis=1))
     denominator = np.sum(labels, axis=1)
 
     mask2 = (denominator == 0)
