@@ -8,31 +8,48 @@ Reimplementation of the DeepAR paper(https://arxiv.org/abs/1704.04110) in PyTorc
 
 ## To run:
 
-0. Install all dependencies listed in requirements.txt. Note that the model has only been tested in the versions shown in the text file.
-1. Download the dataset and preprocess the data:
-```bash
-python preprocess_elect.py
-```
-2. Start training:
-```bash
-python train.py
-```
-If you want to perform ancestral sampling,
-```bash
-python train.py --sampling
-```
-If you do not want to do normalization during evaluation,
-```bash
-python train.py --relative-metrics
-```
-3. Evaluate a set of saved model weights:
-```bash
-python evaluate.py
-```
-4. Perform hyperparameter search:
-```bash
-python search_params.py
-```
+<ol>
+  <li>
+    Install all dependencies listed in requirements.txt. Note that the model has only been tested in the versions shown in the text file.
+  <li>
+    Download the dataset and preprocess the data:
+    ```bash
+    python preprocess_elect.py
+    ```
+  </li>
+  <li>
+    Start training:
+    ```bash
+    python train.py
+    ```
+    <ul>
+      <li>
+        If you want to perform ancestral sampling,
+        ```bash
+        python train.py --sampling
+        ```
+      </li>
+      <li>
+        If you do not want to do normalization during evaluation,
+        ```bash
+        python train.py --relative-metrics
+        ```
+      </li>
+    </ul>
+  </li>
+  <li>
+    Evaluate a set of saved model weights:
+    ```bash
+    python evaluate.py
+    ```
+  </li>
+  <li>
+    Perform hyperparameter search:
+    ```bash
+    python search_params.py
+    ```
+  </li>
+</ol>
 
 ## Results
 The model is evaluated on the electricity dataset, which contains the electricity consumption of 370 households from 2011 to 2014. Under hourly frequency, we use the first week of September, 2014 as the test set and all time steps prior to that as the train set. Following the experiment design in DeepAR, the window size is chosen to be 192, where the last 24 is the forecasting horizon. History (number of time steps since the beginning of each household), month of the year, day of the week, and hour of the day are used as time covariates. Notice that some households started at different times, so we only use windows that contain non-missing values.
