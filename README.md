@@ -13,41 +13,41 @@ Reimplementation of the DeepAR paper(https://arxiv.org/abs/1704.04110) in PyTorc
     Install all dependencies listed in requirements.txt. Note that the model has only been tested in the versions shown in the text file.
   <li>
     Download the dataset and preprocess the data:
-        ```bash
-        python preprocess_elect.py
-        ```
+        
+        > python preprocess_elect.py
+        
   </li>
   <li>
     Start training:
-        ```bash
-        python train.py
-        ```
+        
+        > python train.py
+        
     <ul>
       <li>
         If you want to perform ancestral sampling,
-            ```bash
-            python train.py --sampling
-            ```
+          
+            > python train.py --sampling
+            
       </li>
       <li>
         If you do not want to do normalization during evaluation,
-            ```bash
-            python train.py --relative-metrics
-            ```
+            
+            > python train.py --relative-metrics
+            
       </li>
     </ul>
   </li>
   <li>
     Evaluate a set of saved model weights:
-        ```bash
-        python evaluate.py
-        ```
+        
+        > python evaluate.py
+        
   </li>
   <li>
     Perform hyperparameter search:
-        ```bash
-        python search_params.py
-        ```
+        
+        > python search_params.py
+        
   </li>
 </ol>
 
