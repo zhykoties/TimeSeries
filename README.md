@@ -8,54 +8,49 @@ Reimplementation of the DeepAR paper(https://arxiv.org/abs/1704.04110) in PyTorc
 
 ## To run:
 
-<ol>
-  <li>
-    Install all dependencies listed in requirements.txt. Note that the model has only been tested in the versions shown in the text file.
-  <li>
-    Download the dataset and preprocess the data:
+
+1. Install all dependencies listed in requirements.txt. Note that the model has only been tested in the versions shown in the text file.
+
+1. Download the dataset and preprocess the data:
+  
+   ```bash
+   python preprocess_elect.py
+   ```
+1. Start training:
+  
+   ```bash
+   python train.py
+   ```
+   
+   - If you want to perform ancestral sampling,
+   
+        ```bash
+        python train.py --sampling
+        ```
+   - If you do not want to do normalization during evaluation,
+              
+   
+        ```bash
+        python train.py --relative-metrics
+        ```
+1. Evaluate a set of saved model weights:
         
-        > python preprocess_elect.py
+   ```bash
+   python evaluate.py
+   ```
+1. Perform hyperparameter search:
         
-  </li>
-  <li>
-    Start training:
-        
-        > python train.py
-        
-    <ul>
-      <li>
-        If you want to perform ancestral sampling,
-          
-            > python train.py --sampling
-            
-      </li>
-      <li>
-        If you do not want to do normalization during evaluation,
-            
-            > python train.py --relative-metrics
-            
-      </li>
-    </ul>
-  </li>
-  <li>
-    Evaluate a set of saved model weights:
-        
-        > python evaluate.py
-        
-  </li>
-  <li>
-    Perform hyperparameter search:
-        
-        > python search_params.py
-        
-  </li>
-</ol>
+   ```bash
+    python search_params.py
+   ```
 
 ## Results
-The model is evaluated on the electricity dataset, which contains the electricity consumption of 370 households from 2011 to 2014. Under hourly frequency, we use the first week of September, 2014 as the test set and all time steps prior to that as the train set. Following the experiment design in DeepAR, the window size is chosen to be 192, where the last 24 is the forecasting horizon. History (number of time steps since the beginning of each household), month of the year, day of the week, and hour of the day are used as time covariates. Notice that some households started at different times, so we only use windows that contain non-missing values.
 
-Under Gaussian likelihood, we use the Adam optimizer with early stopping to train the model for 20 epoches. The same set of hyperparameters is used as outlined in the paper. Weights with the best ND value is selected, where __ND = 0.06349__, RMSE = 0.452, rou90 = 0.034 and rou50 = 0.063.
+​	The model is evaluated on the electricity dataset, which contains the electricity consumption of 370 households from 2011 to 2014. Under hourly frequency, we use the first week of September, 2014 as the test set and all time steps prior to that as the train set. Following the experiment design in DeepAR, the window size is chosen to be 192, where the last 24 is the forecasting horizon. History (number of time steps since the beginning of each household), month of the year, day of the week, and hour of the day are used as time covariates. Notice that some households started at different times, so we only use windows that contain non-missing values.
 
-Sample results on electricity. The top 10 plots are sampled from the test set with the highest 10% ND values, whereas the bottom 10 plots are sampled from the rest of the test set.
+​	Under Gaussian likelihood, we use the Adam optimizer with early stopping to train the model for 20 epoches. The same set of hyperparameters is used as outlined in the paper. Weights with the best ND value is selected, where __ND = 0.06349__, RMSE = 0.452, rou90 = 0.034 and rou50 = 0.063.
+
+​	Sample results on electricity. The top 10 plots are sampled from the test set with the highest 10% ND values, whereas the bottom 10 plots are sampled from the rest of the test set.
 
 ![Sample results on electricity. The top 10 plots are sampled from the test set with the highest 10% ND values, whereas the bottom 10 plots are sampled from the rest of the test set.](./experiments/base_model/figures/best_ND.png)
+
