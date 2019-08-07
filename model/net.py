@@ -49,8 +49,8 @@ class Net(nn.Module):
         '''
         Predict mu and sigma of the distribution for z_t.
         Args:
-            x: ([batch_size, 1+cov_dim]): z_{t-1} + x_t, note that z_0 = 0
-            idx ([batch_size]): one integer denoting the time series id
+            x: ([1, batch_size, 1+cov_dim]): z_{t-1} + x_t, note that z_0 = 0
+            idx ([1, batch_size]): one integer denoting the time series id
             hidden ([lstm_layers, batch_size, lstm_hidden_dim]): LSTM h from time step t-1
             cell ([lstm_layers, batch_size, lstm_hidden_dim]): LSTM c from time step t-1
         Returns:
@@ -90,7 +90,7 @@ class Net(nn.Module):
                     pred = gaussian.sample()  # not scaled
                     samples[j, :, t] = pred * v_batch[:, 0] + v_batch[:, 1]
                     if t < (self.params.predict_steps - 1):
-                        x[self.params.predict_start + t + 1, :, 0] = mu_de
+                        x[self.params.predict_start + t + 1, :, 0] = pred
 
             sample_mu = torch.median(samples, dim=0)[0]
             sample_sigma = samples.std(dim=0)
