@@ -165,6 +165,8 @@ if __name__ == '__main__':
     assert os.path.isfile(json_path), 'No json configuration file found at {}'.format(json_path)
     params = utils.Params(json_path)
 
+    utils.set_logger(os.path.join(model_dir, 'eval.log'))
+
     params.relative_metrics = args.relative_metrics
     params.sampling = args.sampling
     params.model_dir = model_dir
@@ -199,6 +201,6 @@ if __name__ == '__main__':
     # Reload weights from the saved file
     utils.load_checkpoint(os.path.join(model_dir, args.restore_file + '.pth.tar'), model)
 
-    test_metrics = evaluate(model, loss_fn, test_loader, params, -1, './figures/DeepAR_epoch_')
+    test_metrics = evaluate(model, loss_fn, test_loader, params, -1)
     save_path = os.path.join(model_dir, 'metrics_test_{}.json'.format(args.restore_file))
     utils.save_dict_to_json(test_metrics, save_path)
