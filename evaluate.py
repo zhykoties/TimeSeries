@@ -201,6 +201,6 @@ if __name__ == '__main__':
     # Reload weights from the saved file
     utils.load_checkpoint(os.path.join(model_dir, args.restore_file + '.pth.tar'), model)
 
-    test_metrics = evaluate(model, loss_fn, test_loader, params, -1)
+    test_metrics = evaluate(model, loss_fn, test_loader, params, -1, params.sampling)
     save_path = os.path.join(model_dir, 'metrics_test_{}.json'.format(args.restore_file))
     utils.save_dict_to_json(test_metrics, save_path)
